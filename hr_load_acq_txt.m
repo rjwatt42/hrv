@@ -44,7 +44,7 @@ end
 hrdata.time=hrdata.time*60; % in seconds
 
 % find the events - where the digitalinput changes
-hrobject.events=hrdata.time(find(diff(hrdata.Digitalinput)>0));
+hrobject.stimuli=hrdata.time(find(diff(hrdata.Digitalinput)>0));
 
 % finally, we downscale the data to 100Hz
 hrobject.hr.samples_per_second=100;

@@ -7,8 +7,8 @@ spectrogram_hamming=1;
 % run through each hr recording in turn
 for hi=1:length(hr_object)
     % set the process parameters
-    hrobject(hi).hr.spectrogram.fft_window_seconds=fft_window_seconds;
-    hrobject(hi).hr.spectrogram.frequency_bands=frequency_bands;
+    hr_object(hi).hr.spectrogram.fft_window_seconds=fft_window_seconds;
+    hr_object(hi).hr.spectrogram.frequency_bands=frequency_bands;
     hr_object(hi).hr.spectrogram.spectrogram_hamming=spectrogram_hamming;
 
     % find the frequencies that will be produced by the fft
