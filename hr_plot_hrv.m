@@ -1,4 +1,4 @@
-
+function hr_plot_hrv(hrobject)
 
 plot(hrobject.hr.spectrogram.spectrogram_times,hrobject.hr.spectrogram.bands(1,:),'linewidth',2)
 hold on

@@ -1,4 +1,4 @@
-
+function hr_plot_hr(hrobject)
 
 
 plot(hrobject.hr.hr_time,hrobject.hr.hr_signal,'k-')
