@@ -7,10 +7,16 @@ hr_plot_hr=function(hrobject) {
   use<-(!is.na(y))
   data<-data.frame(x=x[use],y=y[use])
   
-  g<-ggplot()
+  g<-ggplot() + 
+             theme(panel.background = element_rect(fill="#EEEEEE", colour="#000000"),
+                   panel.grid.major = element_line(linetype="blank"),panel.grid.minor = element_line(linetype="blank"),
+                   plot.background = element_rect(fill="white", colour="black"),
+                   axis.title=element_text(size=12,face="bold")
+             )
+  
   g<-g+geom_line(data=data,aes(x=x,y=y),color="darkgrey")
-  g<-g+geom_vline(xintercept=hrobject$stimuli,color="black");
-  g<-g+geom_vline(xintercept=hrobject$eventTimes,color="red");
+  g<-g+geom_vline(xintercept=hrobject$stimuli,color="black",linewidth=0.25);
+  g<-g+geom_vline(xintercept=hrobject$eventTimes,color="red",linewidth=0.25);
   g<-g+ylab('HR (bpm)')+xlab("time (secs)")  
   
   print(g)

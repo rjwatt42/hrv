@@ -5,7 +5,13 @@
    spectrogram_times<-hrobject$hr$spectrogram$spectrogram_times[(1+offset):ns]
    bands<-hrobject$hr$spectrogram$bands[,(1+offset):ns]
    
-   g<-ggplot()
+   g<-ggplot() + 
+     theme(panel.background = element_rect(fill="#EEEEEE", colour="#000000"),
+           panel.grid.major = element_line(linetype="blank"),panel.grid.minor = element_line(linetype="blank"),
+           plot.background = element_rect(fill="white", colour="black"),
+           axis.title=element_text(size=12,face="bold")
+     )
+   
    data<-data.frame(x=spectrogram_times,y=bands[1,],col=rep("band1",ns-offset))
    g<-g+geom_line(data=data,aes(x=x,y=y,color=col))
    data<-data.frame(x=spectrogram_times,y=bands[2,],col=rep("band2",ns-offset))

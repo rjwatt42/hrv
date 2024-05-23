@@ -16,7 +16,13 @@ adjust=0;
 hrobject$hr$spectrogram$bands=cbind(hrobject$hr$spectrogram$bands, matrix(NA,2,window[2]));
 
 # now plot the individual events
-g<-ggplot()
+g<-ggplot() + 
+  theme(panel.background = element_rect(fill="#EEEEEE", colour="#000000"),
+        panel.grid.major = element_line(linetype="blank"),panel.grid.minor = element_line(linetype="blank"),
+        plot.background = element_rect(fill="white", colour="black"),
+        axis.title=element_text(size=12,face="bold")
+        )
+
 ymean=0;
 cols<-grDevices::hsv(seq(0,1,length.out=length(hrobject$eventList)),1,0.75)
 cols<-c(cols,"#000000")
