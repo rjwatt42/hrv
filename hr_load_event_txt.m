@@ -1,7 +1,7 @@
 function eventObject=hr_load_event_txt(filename)
 
 % read the raw .txt file
-f=readlines(filename);
+f=readlines(file(filename, encoding = "UCS-2LE"));
 
 % remove the header lines
 theline=1;

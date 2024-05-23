@@ -1,6 +1,9 @@
 hr_load_acq_txt=function(filename) {
+
   # read the raw .txt file
-  f=readLines(filename)
+  suppressWarnings(f<-readLines(filename))
+  if (f[1]=="\xff\xfe*") 
+    f<-readLines(file(filename, encoding = "UCS-2LE"))
 
   # decode the header lines
   header='time'

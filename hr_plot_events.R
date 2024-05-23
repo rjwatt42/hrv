@@ -18,7 +18,7 @@ hrobject$hr$spectrogram$bands=cbind(hrobject$hr$spectrogram$bands, matrix(NA,2,w
 # now plot the individual events
 g<-ggplot()
 ymean=0;
-cols<-grDevices::hsv(seq(0,1,length.out=length(hrobject$eventList)),1,1)
+cols<-grDevices::hsv(seq(0,1,length.out=length(hrobject$eventList)),1,0.75)
 cols<-c(cols,"#000000")
 names(cols)<-c(hrobject$eventList,"All")
 for (iEvent in 1:length(hrobject$eventList)) {

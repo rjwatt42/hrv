@@ -1,7 +1,9 @@
 hr_load_event_txt=function(filename) {
 
 # read the raw .txt file
-f=readLines(filename,encoding="UTF-16")
+  suppressWarnings(f<-readLines(filename))
+  if (f[1]=="\xff\xfe*") 
+    f<-readLines(file(filename, encoding = "UCS-2LE"))
 
 # remove the header lines
 theline=1
