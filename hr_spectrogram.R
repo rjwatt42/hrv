@@ -1,7 +1,6 @@
-hr_spectrogram=function(hr_object) {
+hr_spectrogram=function(hr_object,fft_window_seconds=10,frequency_bands=c(0.04, 0.15, 0.4),
+                        timePoints=NULL) {
   
-  fft_window_seconds=10;
-  frequency_bands=c(0.04, 0.15, 0.4);
   spectrogram_hamming=1;
   
   # run through each hr recording in turn
@@ -61,6 +60,16 @@ hr_spectrogram=function(hr_object) {
       # could also do RMS: sqrt(sum(sqr())) but more sensitive to large values
       if (sum(use1)>1)      bands[fi,]=colSums(abs(hrvf[use1,]))
       else                  bands[fi,]=abs(hrvf[use1,])
+    }
+    if (!is.null(timePoints)) {
+      useTimes<-hr_object$hr$spectrogram$spectrogram_times
+      useTimes<-useTimes[2:length(useTimes)]
+      use<-c()
+      for (i in 1:length(timePoints))
+      use<-c(use,which.min(abs(useTimes-timePoints[i])))
+      newBands<-bands*0
+      newBands[,use]<-bands[,use]
+      bands<-newBands
     }
     hr_object$hr$spectrogram$bands<-bands
   }

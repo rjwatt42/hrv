@@ -12,19 +12,19 @@ while(1==1) {
   theline=theline+1;
 }
 
-stimuli=c();
+events=c();
 while (1==1) {
   if (f[theline]=='*** LogFrame Start ***') break; end
   if (grepl('Stimulus:',f[theline])) {
     bits=strsplit(f[theline],' ')[[1]]
     end<-length(bits)
     bits[end]=gsub('.mp3','',bits[end]);
-    stimuli=c(stimuli,bits[end]);
+    events=c(events,bits[end]);
   }
   theline=theline+1;
 }
 
-eventObject<-list(stimuli=stimuli)
+eventObject<-list(events=events)
 
 return(eventObject)
 }

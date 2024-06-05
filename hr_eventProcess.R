@@ -25,15 +25,15 @@ hr_eventProcess=function(hrobject,eventObject) {
   )
   POI<-matrix(POI,ncol=3,byrow=TRUE)
   
-  stimStartTimes=hrobject$stimuli;
+  stimStartTimes=hrobject$stimuli
   
   eventList=c();
   eventTimes=c();
-  for (i in 1:length(eventObject$stimuli)) {
-    time=stimStartTimes[i]
-    use=which(POI[,1]==eventObject$stimuli[i])
+  for (i in 1:length(eventObject$events)) {
+    startTime=stimStartTimes[i]
+    use=which(POI[,1]==eventObject$events[i])
     eventList=c(eventList, POI[use,2])
-    eventTimes=c(eventTimes, time+as.numeric(POI[use,3]))
+    eventTimes=c(eventTimes, startTime+as.numeric(POI[use,3]))
   }
   
   
