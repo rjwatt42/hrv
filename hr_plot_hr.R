@@ -1,4 +1,4 @@
-hr_plot_hr=function(hrobject,offset=500,plain=FALSE,filter=FALSE,doReturn=FALSE) {
+hr_plot_hr=function(hrobject,offset=400,plain=FALSE,filter=FALSE,doReturn=FALSE) {
   
   ns<-length(hrobject$hr$hr_time)
   x<-hrobject$hr$hr_time[(1+offset):ns]

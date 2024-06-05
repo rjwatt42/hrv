@@ -1,6 +1,5 @@
- hr_plot_hrv=function(hrobject,plain=FALSE) {
+ hr_plot_hrv=function(hrobject,offset=400,plain=FALSE) {
 
-   offset<-500
    ns<-length(hrobject$hr$spectrogram$spectrogram_times)-1
    spectrogram_times<-hrobject$hr$spectrogram$spectrogram_times[(1+offset):ns]
    bands<-hrobject$hr$spectrogram$bands[,(1+offset):ns]
