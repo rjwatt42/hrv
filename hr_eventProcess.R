@@ -1,4 +1,6 @@
 hr_eventProcess=function(hrobject,eventObject) {
+# this function adds in point of interest (POI) timings
+#       to be used after the event times & identities have been read
   
   POI=c(
     'Stim_1a', '1a1', 4.25, 

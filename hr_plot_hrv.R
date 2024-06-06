@@ -1,4 +1,4 @@
- hr_plot_hrv=function(hrobject,offset=400,plain=FALSE) {
+hr_plot_hrv=function(hrobject,offset=400,plain=FALSE) {
 
    ns<-length(hrobject$hr$spectrogram$spectrogram_times)-1
    spectrogram_times<-hrobject$hr$spectrogram$spectrogram_times[(1+offset):ns]
@@ -31,7 +31,7 @@
                              )
      )
    }
-   g<-g+scale_x_continuous(limits=c(0,max(data$x)+10))+scale_y_continuous(limits=c(0,5))
+   g<-g+scale_x_continuous(limits=c(0,max(data$x)+10))+scale_y_continuous(limits=c(0,3))
    g<-g+ylab('HRV')+xlab("time (secs)")  
    
    print(g)

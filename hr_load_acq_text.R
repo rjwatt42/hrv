@@ -1,5 +1,8 @@
 hr_load_acq_txt=function(filename) {
-
+# this function reads the bio-pac heart-rate data
+#                             and also the time of stimuli
+#                             but not the identity of the stimuli
+  
   # read the raw .txt file
   suppressWarnings(f<-readLines(filename))
   if (f[1]=="\xff\xfe*") 

@@ -1,7 +1,7 @@
 hr_spectrogram=function(hr_object,fft_window_seconds=10,frequency_bands=c(0.04, 0.15, 0.4),
                         timePoints=NULL) {
   
-  spectrogram_hamming=1;
+  spectrogram_hamming<-TRUE
   
   # run through each hr recording in turn
   for (hi in 1:1) {
@@ -19,7 +19,7 @@ hr_spectrogram=function(hr_object,fft_window_seconds=10,frequency_bands=c(0.04, 
     use_frequencies=which(actual_frequencies<=2);
     
     # get the mask window
-    if (spectrogram_hamming==1)
+    if (spectrogram_hamming)
       mask=hamming(fft_size,'periodic')
     else
       mask=1
@@ -37,7 +37,7 @@ hr_spectrogram=function(hr_object,fft_window_seconds=10,frequency_bands=c(0.04, 
       local_signal=full_signal[si+(0:(fft_size-1))];
       # subtract the DC - necessary because of the hamming mask
       local_signal=local_signal-mean(local_signal,na.rm=TRUE)
-      # multuply by the mask
+      # multiply by the mask
       local_signal=local_signal*mask
       # do the fft
       Y = fft(local_signal[1:L])/L

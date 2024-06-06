@@ -1,5 +1,7 @@
 hr_load_event_txt=function(filename) {
-
+# this function reads the e-prime events log
+#    which contains the identities of the stimuli
+  
 # read the raw .txt file
   suppressWarnings(f<-readLines(filename))
   if (f[1]=="\xff\xfe*") 
