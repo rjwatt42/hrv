@@ -1,8 +1,5 @@
 
-library(ggplot2)
-library(grDevices)
-library(gsignal)
-
+source("https://github.com/rjwatt42/hrv/raw/main/hr_start.R")
 
 h<-hr_load_acq_txt('Participant1 Recording.txt')
 s<-hr_load_event_txt('Participant1 Script.txt')
