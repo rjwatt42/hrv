@@ -57,14 +57,13 @@ hr_load_acq_txt=function(filename) {
   hr_time=seq(0,max(hrdata$time),1/samples_per_second)
   hr_signal=approx(hrdata$time,hrdata$HeartRate,hr_time)$y
 
-  hr<-list(samples_per_second=samples_per_second,
-           hr_time=hr_time,
+  hr<-data.frame(hr_time=hr_time,
            hr_signal=hr_signal
   )
 
-  hrobject<-list(hrdata=hrdata,
-                 stimuli=stimuli,
-                 hr=hr)  
+  hrobject<-list(hr=hr,
+                 stimuli=stimuli
+                 )  
   
   # and return the data
   return(hrobject)

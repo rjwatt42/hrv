@@ -9,7 +9,7 @@ hr_spectrogram=function(hr_object,fft_window_seconds=10,frequency_bands=c(0.04, 
     hr_object$hr$spectrogram$fft_window_seconds=fft_window_seconds;
     hr_object$hr$spectrogram$frequency_bands=frequency_bands;
     hr_object$hr$spectrogram$spectrogram_hamming=spectrogram_hamming;
-    samples_per_second<-hr_object$hr$samples_per_secon
+    samples_per_second<-1/diff(hr_object$hr$hr_time[1:2])
     
     # find the frequencies that will be produced by the fft
     fft_size=samples_per_second*fft_window_seconds;
