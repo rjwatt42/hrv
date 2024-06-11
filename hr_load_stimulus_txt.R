@@ -1,5 +1,5 @@
-hr_load_event_txt=function(filename) {
-# this function reads the e-prime events log
+hr_load_stimulus_txt=function(filename) {
+# this function reads the e-prime stimulus log
 #    which contains the identities of the stimuli
   
 # read the raw .txt file
@@ -14,20 +14,20 @@ while(1==1) {
   theline=theline+1;
 }
 
-events=c();
+stimuli=c();
 while (1==1) {
   if (f[theline]=='*** LogFrame Start ***') break; end
   if (grepl('Stimulus:',f[theline])) {
     bits=strsplit(f[theline],' ')[[1]]
     end<-length(bits)
     bits[end]=gsub('.mp3','',bits[end]);
-    events=c(events,bits[end]);
+    stimuli=c(stimuli,bits[end]);
   }
   theline=theline+1;
 }
 
-eventObject<-list(events=events)
+stimulusObject<-list(stimuli=stimuli)
 
-return(eventObject)
+return(stimulusObject)
 }
 
