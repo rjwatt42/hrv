@@ -13,35 +13,35 @@ hr_load_acq_txt=function(filename) {
   channelHeads=FALSE
   theline=1
   while(1==1) {
-    # data lines have tab characters (Ascii 9)
-    # if this is a data line, we have reached the end of the header
-    isData=grepl(as.character(9),f[theline])
-    if (isData) { 
-      theline=theline+1
-      break
-    }
     # have we reached the section that describes each channel?
-    if (channelHeads) {
-      # keep only alphabetic characters as these will become field names 
-      fl=gsub('[^a-zA-Z]*','',f[theline])
-      header=c(header,fl)
-      # channel descriptions span two lines
-      theline=theline+1
-    }
-    
     # the line that has "3 channels" immediately precedes the channel
-    # descrpition
+    # description
     channels=grepl('channels',f[theline]);
     # so the next line is a channel description
-    if (channels) channelHeads=TRUE
+    if (channels) {
+      noChannels<-as.numeric(strsplit(f[theline]," ")[[1]][1])
+      break
+    }
     theline=theline+1;
     # end of header
   }
+  
+  theline=theline+1;
+  for ( i in 1:noChannels) {
+    # keep only alphabetic characters as these will become field names 
+    fl=gsub('[^a-zA-Z]*','',f[theline])
+    header=c(header,fl)
+    # channel descriptions span two lines
+    theline=theline+2
+  }
+  
   # now we get the data from the remaining lines
-  theline=theline+1
+  theline=theline+2
   z<-f[theline:length(f)]
   z1<-lapply(strsplit(z,"\t"),as.numeric)
   data<-matrix(unlist(z1),ncol=4,byrow=TRUE)
+  use<-which(diff(data[,1])>0)
+  data<-data[use,]
   # put the data into a structure, using channel descriptions as field names
   hrdata=data.frame(data);
   names(hrdata)<-header[1:4]
