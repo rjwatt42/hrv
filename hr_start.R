@@ -4,7 +4,7 @@ library(grDevices)
 library(gsignal)
 
 source("https://github.com/rjwatt42/hrv/raw/main/hr_load_acq_text.R")
-source("https://github.com/rjwatt42/hrv/raw/main/hr_load_event_txt.R")
+source("https://github.com/rjwatt42/hrv/raw/main/hr_load_stimulus_txt.R")
 source("https://github.com/rjwatt42/hrv/raw/main/hr_eventProcess.R")
 
 source("https://github.com/rjwatt42/hrv/raw/main/hr_spectrogram.R")
