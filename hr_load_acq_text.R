@@ -12,7 +12,7 @@ hr_load_acq_txt=function(filename) {
   header='time'
   channelHeads=FALSE
   theline=1
-  while(1==1) {
+  while(theline<=10) {
     # have we reached the section that describes each channel?
     # the line that has "3 channels" immediately precedes the channel
     # description
@@ -25,6 +25,7 @@ hr_load_acq_txt=function(filename) {
     theline=theline+1;
     # end of header
   }
+  if (!channels) return(NULL)
   
   theline=theline+1;
   for ( i in 1:noChannels) {

@@ -31,9 +31,9 @@ hr_eventProcess=function(hrobject,eventObject) {
   
   eventList=c();
   eventTimes=c();
-  for (i in 1:length(eventObject$events)) {
+  for (i in 1:length(eventObject$stimuli)) {
     startTime=stimStartTimes[i]
-    use=which(POI[,1]==eventObject$events[i])
+    use=which(POI[,1]==eventObject$stimuli[i])
     eventList=c(eventList, POI[use,2])
     eventTimes=c(eventTimes, startTime+as.numeric(POI[use,3]))
   }
@@ -41,6 +41,6 @@ hr_eventProcess=function(hrobject,eventObject) {
   
   hrobject$eventList=eventList;
   hrobject$eventTimes=eventTimes;
-  
+
   return(hrobject)
 }
