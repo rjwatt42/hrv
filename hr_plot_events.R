@@ -10,13 +10,13 @@ use<-window[1]:window[2]
 
 # we can adjust the position of the plot to take into account the hamming
 # window
-adjust<-samples_per_second*hrobject$hr$spectrogram$fft_window_seconds/2
+adjust<-samples_per_second*hrobject$spectrogram$fft_window_seconds/2
 # but better not to
 adjust<-0
 
 # pad out the spectrogram to provide enough window for an event right at
 # the end
-hrobject$hr$spectrogram$bands<-cbind(hrobject$hr$spectrogram$bands, matrix(NA,2,window[2]))
+hrobject$hr$spectrogram$bands<-cbind(hrobject$spectrogram$bands, matrix(NA,2,window[2]))
 
 # now plot the individual events
 g<-ggplot() + 
@@ -32,7 +32,7 @@ cols<-c(cols,"#000000")
 names(cols)<-c(hrobject$eventList,"All")
 for (iEvent in 1:length(hrobject$eventList)) {
   x<-use/samples_per_second
-  y<-hrobject$hr$spectrogram$bands[1,round(hrobject$eventTimes[iEvent]*samples_per_second)+use-adjust]
+  y<-hrobject$spectrogram$bands[1,round(hrobject$eventTimes[iEvent]*samples_per_second)+use-adjust]
   ymean<-ymean+y
   col<-rep(hrobject$eventList[iEvent],length(x))
   g<-g+geom_line(data=data.frame(x=x,y=y,col=col),aes(x=x,y=y,colour=col),linewidth=0.5)

@@ -1,8 +1,8 @@
 hr_plot_hrv=function(hrobject,offset=400,plain=FALSE) {
 
-   ns<-length(hrobject$hr$spectrogram$spectrogram_times)-1
-   spectrogram_times<-hrobject$hr$spectrogram$spectrogram_times[(1+offset):ns]
-   bands<-hrobject$hr$spectrogram$bands[,(1+offset):ns]
+   ns<-length(hrobject$spectrogram$spectrogram_times)-1
+   spectrogram_times<-hrobject$spectrogram$spectrogram_times[(1+offset):ns]
+   bands<-hrobject$spectrogram$bands[,(1+offset):ns]
    
    g<-ggplot() + 
      theme(panel.background = element_rect(fill="#EEEEEE", colour="#000000"),
@@ -26,8 +26,8 @@ hr_plot_hrv=function(hrobject,offset=400,plain=FALSE) {
      g<-g+geom_line(data=data,aes(x=x,y=y,color=col))
      cols<-c(band1="blue",band2="green")
      g<-g+scale_color_manual(name="frequencies",values=cols,
-                             labels=c(paste0(h1$hr$spectrogram$frequency_bands[1],"-",h1$hr$spectrogram$frequency_bands[2],"Hz"),
-                                      paste0(h1$hr$spectrogram$frequency_bands[2],"-",h1$hr$spectrogram$frequency_bands[3],"Hz")
+                             labels=c(paste0(hrobject$spectrogram$frequency_bands[1],"-",hrobject$spectrogram$frequency_bands[2],"Hz"),
+                                      paste0(hrobject$spectrogram$frequency_bands[2],"-",hrobject$spectrogram$frequency_bands[3],"Hz")
                              )
      )
    }
