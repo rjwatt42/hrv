@@ -17,16 +17,16 @@ hr_collect_data<-function(folder) {
       useS<-grep(useParts[i],sfiles)
       s<-hr_load_stimulus_txt(paste0("data/",sfiles[useS]))
       hrObject<-hr_eventProcess(h,s)
-      
+
       hrObject<-hr_spectrogram(hrObject)
       hrvEvents<-hr_extract_events(hrObject)
       nEvents<-nrow(hrvEvents$eventsHRV)
       nSamples<-ncol(hrvEvents$eventsHRV)
-      
+
       if (is.null(hrvData))
         hrvData<-array(NA,dim=c(nParticipants,nEvents,nSamples))
       hrvData[i,,]<-hrvEvents$eventsHRV
-      
+      print(paste0("Success: ",useParts[i]))
     } else {
       print(paste0("Failed: ",useParts[i]))
     }

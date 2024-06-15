@@ -8,7 +8,6 @@ hr_show_data<-function(hrvData,whichShow="All") {
     nEvents<-length(whichShow)
     hrvData<-array(hrvData,dim=c(nParticipants,nEvents,nSamples))
   }
-
   
   meanParticipantHRV<-colMeans(hrvData,na.rm=TRUE)
   meanParticipantEventHRV<-colMeans(meanParticipantHRV,na.rm=TRUE)

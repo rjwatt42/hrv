@@ -25,24 +25,36 @@ hr_load_acq_txt=function(filename) {
     theline=theline+1;
     # end of header
   }
-  if (!channels) return(NULL)
-  
-  theline=theline+1;
-  for ( i in 1:noChannels) {
-    # keep only alphabetic characters as these will become field names 
-    fl=gsub('[^a-zA-Z]*','',f[theline])
-    header=c(header,fl)
-    # channel descriptions span two lines
-    theline=theline+2
+  if (!channels) {
+    theLine<--1
+    noChannels<-3
+    header<-c(header,"ECG","Digitalinput","HeartRate")
+  } else {
+    theline=theline+1;
+    for ( i in 1:noChannels) {
+      # keep only alphabetic characters as these will become field names 
+      fl=gsub('[^a-zA-Z]*','',f[theline])
+      header=c(header,fl)
+      # channel descriptions span two lines
+      theline=theline+2
+    }
   }
+  
   
   # now we get the data from the remaining lines
   theline=theline+2
   z<-f[theline:length(f)]
   z1<-lapply(strsplit(z,"\t"),as.numeric)
-  data<-matrix(unlist(z1),ncol=4,byrow=TRUE)
-  use<-which(diff(data[,1])>0)
-  data<-data[use,]
+  if (length(z1[[1]])==3) {
+    data<-matrix(unlist(z1),ncol=3,byrow=TRUE)
+    sampleInterval<-0.5/1000/60
+    timings<-array(seq(0,nrow(data)-1)*sampleInterval,dim=c(nrow(data),1))
+    data<-cbind(timings,data)
+  } else {
+    data<-matrix(unlist(z1),ncol=4,byrow=TRUE)
+    use<-which(diff(data[,1])>0)
+    data<-data[use,]
+  }
   # put the data into a structure, using channel descriptions as field names
   hrdata=data.frame(data);
   names(hrdata)<-header[1:4]
