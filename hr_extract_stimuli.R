@@ -1,4 +1,4 @@
-hr_extract_events=function(hrobject,window=c(-4, 8)
+hr_extract_stimuli=function(hrobject,window=c(-4,16)
                         ) {
 
 # window: the window around each event is seconds
@@ -20,18 +20,18 @@ adjust<-0
 hrobject$spectrogram$bands<-cbind(hrobject$spectrogram$bands, matrix(NA,2,window[2]))
 
 ymean<-0
-eventsHRV<-matrix(0,length(hrobject$eventList),length(useTimes))
-for (iEvent in 1:length(hrobject$eventList)) {
-  eventTime<-round(hrobject$eventTimes[iEvent]*samples_per_second)
+stimuliHRV<-matrix(0,length(hrobject$stimuliList),length(useTimes))
+for (iStimulus in 1:length(hrobject$stimuliList)) {
+  eventTime<-round(hrobject$stimuliTimes[iStimulus]*samples_per_second)
   thisTimes<-eventTime+useTimes-adjust
   thisData<-hrobject$spectrogram$bands[1,thisTimes]
   offset<-mean(hrobject$spectrogram$bands[1,eventTime+offsetTimes],na.rm=TRUE)
-  eventsHRV[iEvent,]<-thisData-offset
+  stimuliHRV[iStimulus,]<-thisData-offset
 }
-useOrder<-order(hrobject$eventList)
-eventsHRV<-eventsHRV[useOrder,]
+useOrder<-order(hrobject$stimuliList)
+stimuliHRV<-stimuliHRV[useOrder,]
 
 timeBase<-useTimes/samples_per_second
 
-return(list(timeBase=timeBase,eventsHRV=eventsHRV))
+return(list(timeBase=timeBase,stimuliHRV=stimuliHRV))
 }

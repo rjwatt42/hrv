@@ -10,4 +10,11 @@ hr_plot_hr(hrobject)
 hr_plot_hrv(hrobject)
 hr_plot_events(hrobject)
 
+##################
+#
 
+hr_data<-hr_collect_data("Data")
+hr_show_data(hr_data,typeShow="stimuli",whichShow="All")
+hr_show_data(hr_data,typeShow="events",whichShow="All")
+
+hr_write_results(hr_data,"results.csv")

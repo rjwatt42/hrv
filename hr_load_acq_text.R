@@ -1,4 +1,4 @@
-hr_load_acq_txt=function(filename) {
+hr_load_acq_txt=function(filename,recover=TRUE) {
 # this function reads the bio-pac heart-rate data
 #                             and also the time of stimuli
 #                             but not the identity of the stimuli
@@ -26,7 +26,8 @@ hr_load_acq_txt=function(filename) {
     # end of header
   }
   if (!channels) {
-    theLine<--1
+    if (!recover) return(NULL)
+    theLine<- -1
     noChannels<-3
     header<-c(header,"ECG","Digitalinput","HeartRate")
   } else {

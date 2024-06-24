@@ -39,8 +39,11 @@ hr_eventProcess=function(hrobject,eventObject) {
   }
   
   
+  hrobject$stimuliList=eventObject$stimuli;
+  hrobject$stimuliTimes=stimStartTimes;
+  
   hrobject$eventList=eventList;
   hrobject$eventTimes=eventTimes;
-
+  
   return(hrobject)
 }

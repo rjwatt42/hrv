@@ -1,5 +1,12 @@
-hr_show_data<-function(hrvData,whichShow="All") {
+hr_show_data<-function(hrvObject,typeShow="events",whichShow="All") {
   
+  if (typeShow=="events") {
+    hrvData<-hrvObject$eventData
+    timeBase<-hrvObject$eventsTimeBase
+  } else {
+    hrvData<-hrvObject$stimuliData
+    timeBase<-hrvObject$stimuliTimeBase
+  }
   nParticipants<-dim(hrvData)[1]
   nEvents<-dim(hrvData)[2]
   nSamples<-dim(hrvData)[3]
@@ -25,11 +32,11 @@ hr_show_data<-function(hrvData,whichShow="All") {
     )
   g<-g+geom_hline(yintercept=0,color="red")
   # plot the heart-rate line
-  g<-g+geom_line(data=data.frame(x=hrvEvents$eventsTimes,y=meanParticipantEventHRV),
+  g<-g+geom_line(data=data.frame(x=timeBase,y=meanParticipantEventHRV),
                  aes(x=x,y=y),color="black")
-  g<-g+geom_line(data=data.frame(x=hrvEvents$eventsTimes,y=meanParticipantEventHRV-seParticipantEventHRV),
+  g<-g+geom_line(data=data.frame(x=timeBase,y=meanParticipantEventHRV-seParticipantEventHRV),
                  aes(x=x,y=y),color="lightgrey")
-  g<-g+geom_line(data=data.frame(x=hrvEvents$eventsTimes,y=meanParticipantEventHRV+seParticipantEventHRV),
+  g<-g+geom_line(data=data.frame(x=timeBase,y=meanParticipantEventHRV+seParticipantEventHRV),
                  aes(x=x,y=y),color="lightgrey")
   g<-g+labs(y='HRV',x="time (secs)",title=paste0("Event=",whichShow))
   print(g)
