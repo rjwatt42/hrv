@@ -1,4 +1,4 @@
-hr_show_data<-function(hrvObject,typeShow="events",whichShow="All") {
+hr_show_data<-function(hrvObject,typeShow="events",whichShow="all") {
   
   if (typeShow=="events") {
     hrvData<-hrvObject$eventData
@@ -10,7 +10,7 @@ hr_show_data<-function(hrvObject,typeShow="events",whichShow="All") {
   nParticipants<-dim(hrvData)[1]
   nEvents<-dim(hrvData)[2]
   nSamples<-dim(hrvData)[3]
-  if (whichShow!="All") {
+  if (whichShow!="all") {
     hrvData<-hrvData[,whichShow,]  
     nEvents<-length(whichShow)
     hrvData<-array(hrvData,dim=c(nParticipants,nEvents,nSamples))
@@ -38,7 +38,7 @@ hr_show_data<-function(hrvObject,typeShow="events",whichShow="All") {
                  aes(x=x,y=y),color="lightgrey")
   g<-g+geom_line(data=data.frame(x=timeBase,y=meanParticipantEventHRV+seParticipantEventHRV),
                  aes(x=x,y=y),color="lightgrey")
-  g<-g+labs(y='HRV',x="time (secs)",title=paste0("Event=",whichShow))
+  g<-g+labs(y='HRV',x="time (secs)",title=paste0(typeShow,"=",whichShow))
   print(g)
   
 }
